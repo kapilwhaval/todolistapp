@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
-import AddButton from '../components/add-button';
 
 const TodoList = () => {
 
@@ -8,7 +7,6 @@ const TodoList = () => {
 
     return (
         <View style={{flex:1}}>
-            <AddButton />
         </View>
     );
 }

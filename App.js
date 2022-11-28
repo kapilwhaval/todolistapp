@@ -1,12 +1,13 @@
 import React from 'react';
-import { View } from 'react-native';
-import TodoList from './src/screens/todolist';
+import { store } from './src/redux/store'
+import { Provider } from 'react-redux'
+import Routes from './src/routes';
 
 const App = () => {
   return (
-    <View style={{ flex: 1 }}>
-      <TodoList />
-    </View>
+    <Provider store={store}>
+      <Routes />
+    </Provider>
   );
 }
 
