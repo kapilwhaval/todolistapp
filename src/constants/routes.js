@@ -1,6 +1,7 @@
 const routes = {
     login: 'login',
-    signup: 'signup'
+    signup: 'signup',
+    home:'home'
 }
 
 export default routes;

@@ -3,6 +3,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import { StatusBar } from 'react-native';
 import AuthRoutes from './auth-routes';
+import AppRoutes from './app-routes';
 
 const Routes = () => {
 
@@ -11,7 +12,7 @@ const Routes = () => {
     return (
         <NavigationContainer>
             <StatusBar barStyle={'light-content'} hidden={!user} />
-            {user ? null : <AuthRoutes />}
+            {user ? <AppRoutes /> : <AuthRoutes />}
         </NavigationContainer>
     );
 }
