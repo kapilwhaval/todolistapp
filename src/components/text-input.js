@@ -1,10 +1,10 @@
 import { StyleSheet, TextInput, View } from "react-native";
 import colors from "../constants/colors";
 
-export const AuthInput = ({ placeholder, onChange, value, error }) => {
+export const AuthInput = ({ placeholder, onChange, value, error, secured }) => {
     return (
         <View style={[styles.authInputContainer, {borderColor: error ? colors.red : colors.lightGray}]}>
-            <TextInput autoCapitalize="none" onChangeText={onChange} value={value} placeholder={placeholder} style={styles.authInput} />
+            <TextInput secureTextEntry={secured} autoCapitalize="none" onChangeText={onChange} value={value} placeholder={placeholder} style={styles.authInput} />
         </View>
     );
 }
