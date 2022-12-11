@@ -16,3 +16,5 @@ export const addTask = (data, token) => api('post', '/task', data, token).then((
 export const updateTask = (data, token) => api('put', `/task/${data._id}`, data, token).then((res) => { return res.data }).catch((err) => { throw err; });
 
 export const getAllTasks = (data, token) => api('get', '/tasks', data, token).then((res) => { return res.data }).catch((err) => { throw err; });
+
+export const deleteTask = (id, token) => api('delete', `/task/${id}`, null, token).then((res) => { return res.data }).catch((err) => { throw err; });

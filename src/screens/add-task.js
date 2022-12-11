@@ -2,12 +2,13 @@ import { Formik } from "formik";
 import { Text, View } from "react-native";
 import { useSelector } from "react-redux";
 import { SubmitButton } from "../components/buttons";
+import toastMessage from '../components/toast';
 import Loader from '../components/loader';
 import Header from "../components/header";
 import { FormInput } from '../components/text-input';
 import * as Yup from 'yup';
 import { useState } from "react";
-import { addTask, updateTask } from "../apis";
+import { addTask, deleteTask, updateTask } from "../apis";
 
 const AddTask = ({ navigation, route }) => {
 
@@ -51,6 +52,20 @@ const AddTask = ({ navigation, route }) => {
         }
     }
 
+    const onDelete = () => {
+        setLoading(true)
+        deleteTask(route.params?.taskToEdit._id, token)
+            .then(res => {
+                setLoading(false)
+                toastMessage('success', 'Task Deleted Successfully');
+                navigation.goBack();
+            })
+            .catch(err => {
+                setLoading(false);
+                toastMessage('error', err.response?.data?.message || 'Something went wrong');
+            })
+    }
+
     return (
         <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
             {({ values, errors, handleChange, handleSubmit, isValid, dirty }) => (
@@ -61,6 +76,7 @@ const AddTask = ({ navigation, route }) => {
                     <View style={{ position: 'absolute', bottom: 0, left: 0, width: '100%' }}>
                         {serverError ? <Text style={{ color: 'red', marginVertical: 10, alignSelf: 'center' }}>{serverError}</Text> : null}
                         {loading ? <Loader /> : <SubmitButton disabled={!(isValid && dirty)} title={route.params?.taskToEdit ? 'Update' : 'Add'} onPress={handleSubmit} />}
+                        {route.params?.taskToEdit && !loading ? <SubmitButton disabled={false} danger title={'Delete'} onPress={onDelete} /> : null}
                     </View>
                 </View>
             )}
