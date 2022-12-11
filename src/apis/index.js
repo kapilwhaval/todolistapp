@@ -13,4 +13,6 @@ export const signUp = (data) => api('post', '/signup', data).then((res) => { ret
 
 export const addTask = (data, token) => api('post', '/task', data, token).then((res) => { return res.data }).catch((err) => { throw err; });
 
+export const updateTask = (data, token) => api('put', `/task/${data._id}`, data, token).then((res) => { return res.data }).catch((err) => { throw err; });
+
 export const getAllTasks = (data, token) => api('get', '/tasks', data, token).then((res) => { return res.data }).catch((err) => { throw err; });

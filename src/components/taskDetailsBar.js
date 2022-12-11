@@ -1,12 +1,23 @@
-import { StyleSheet, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { useState } from "react";
+import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import colors from "../constants/colors";
+import routes from "../constants/routes";
 
 const TaskDetailsBar = ({ task }) => {
+
+    const { navigate } = useNavigation();
+    const [taskDetails, setTaskDetails] = useState(task)
+
+    const onTaskUpdate = (res) => {
+        setTaskDetails(res)
+    }
+
     return (
-        <View style={styles.container}>
-            <Text style={styles.text}>{task.title}</Text>
-            <Text style={styles.text}>{task.description}</Text>
-        </View>
+        <TouchableOpacity onPress={() => navigate(routes.addTask, { taskToEdit: taskDetails, onTaskUpdate })} style={styles.container}>
+            <Text style={styles.text}>{taskDetails.title}</Text>
+            <Text style={styles.text}>{taskDetails.description}</Text>
+        </TouchableOpacity>
     );
 }
 

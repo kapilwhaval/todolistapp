@@ -7,7 +7,7 @@ import Header from "../components/header";
 import { FormInput } from '../components/text-input';
 import * as Yup from 'yup';
 import { useState } from "react";
-import { addTask } from "../apis";
+import { addTask, updateTask } from "../apis";
 
 const AddTask = ({ navigation, route }) => {
 
@@ -15,7 +15,7 @@ const AddTask = ({ navigation, route }) => {
     const [serverError, setServerError] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const initialValues = { user: user._id, title: "", description: "", status: "pending" }
+    const initialValues = route.params?.taskToEdit || { user: user._id, title: "", description: "", status: "pending" }
 
     const validationSchema = () => Yup.object().shape({
         title: Yup.string().required('Please enter title'),
@@ -25,16 +25,30 @@ const AddTask = ({ navigation, route }) => {
     const onSubmit = (values) => {
         setLoading(true);
         setServerError('');
-        addTask(values, token)
-            .then(res => {
-                setLoading(false);
-                navigation.goBack();
-                route.params.onAddingNewTask(res);
-            })
-            .catch(err => {
-                setLoading(false);
-                setServerError(err.response?.data?.message || 'Something went wrong')
-            })
+        if (route.params?.taskToEdit) {
+            updateTask(values, token)
+                .then(res => {
+                    setLoading(false);
+                    navigation.goBack();
+                    route.params?.onTaskUpdate(res);
+                })
+                .catch(err => {
+                    setLoading(false);
+                    setServerError(err.response?.data?.message || 'Something went wrong')
+                })
+        }
+        else {
+            addTask(values, token)
+                .then(res => {
+                    setLoading(false);
+                    navigation.goBack();
+                    route.params?.onAddingNewTask(res);
+                })
+                .catch(err => {
+                    setLoading(false);
+                    setServerError(err.response?.data?.message || 'Something went wrong')
+                })
+        }
     }
 
     return (
@@ -46,7 +60,7 @@ const AddTask = ({ navigation, route }) => {
                     <FormInput error={errors.description ? errors.description : null} onChange={handleChange('description')} value={values.description} placeholder='Description' noOfLines={10} />
                     <View style={{ position: 'absolute', bottom: 0, left: 0, width: '100%' }}>
                         {serverError ? <Text style={{ color: 'red', marginVertical: 10, alignSelf: 'center' }}>{serverError}</Text> : null}
-                        {loading ? <Loader /> : <SubmitButton disabled={!(isValid && dirty)} title='Add Task' onPress={handleSubmit} />}
+                        {loading ? <Loader /> : <SubmitButton disabled={!(isValid && dirty)} title={route.params?.taskToEdit ? 'Update' : 'Add'} onPress={handleSubmit} />}
                     </View>
                 </View>
             )}
