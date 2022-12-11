@@ -59,8 +59,10 @@ const AddTask = ({ navigation, route }) => {
                 setLoading(false)
                 toastMessage('success', 'Task Deleted Successfully');
                 navigation.goBack();
+                route.params?.onDelete();
             })
             .catch(err => {
+                console.log(err)
                 setLoading(false);
                 toastMessage('error', err.response?.data?.message || 'Something went wrong');
             })

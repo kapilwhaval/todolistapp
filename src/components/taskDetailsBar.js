@@ -4,7 +4,7 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import colors from "../constants/colors";
 import routes from "../constants/routes";
 
-const TaskDetailsBar = ({ task }) => {
+const TaskDetailsBar = ({ task, onDelete }) => {
 
     const { navigate } = useNavigation();
     const [taskDetails, setTaskDetails] = useState(task)
@@ -14,7 +14,7 @@ const TaskDetailsBar = ({ task }) => {
     }
 
     return (
-        <TouchableOpacity onPress={() => navigate(routes.addTask, { taskToEdit: taskDetails, onTaskUpdate })} style={styles.container}>
+        <TouchableOpacity onPress={() => navigate(routes.addTask, { taskToEdit: taskDetails, onTaskUpdate, onDelete })} style={styles.container}>
             <Text style={styles.text}>{taskDetails.title}</Text>
             <Text style={styles.text}>{taskDetails.description}</Text>
         </TouchableOpacity>

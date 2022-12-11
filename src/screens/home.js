@@ -1,3 +1,4 @@
+import { iteratorSymbol } from 'immer/dist/internal';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
@@ -43,10 +44,10 @@ const Home = ({ navigation, route }) => {
             <Header heading='Todo List' right={<TouchableOpacity onPress={logout}><Text style={styles.logout}>Logout</Text></TouchableOpacity>} />
             {loading ? <Loader /> : null}
             <View style={styles.taskListContainer}>
-            {tasks.map((task, index) => <TaskDetailsBar key={index} task={task} />)}
+                {tasks.map((task, index) => <TaskDetailsBar key={index} task={task} onDelete={() => setTasks(tasks.filter(filterItem => filterItem._id !== task._id))} />)}
             </View>
             <View style={{ position: 'absolute', bottom: 0, left: 0, width: '100%' }}>
-                <SubmitButton title='Add Task' onPress={() => navigation.navigate(routes.addTask, {onAddingNewTask})} />
+                <SubmitButton title='Add Task' onPress={() => navigation.navigate(routes.addTask, { onAddingNewTask })} />
             </View>
         </View>
     );
@@ -54,7 +55,7 @@ const Home = ({ navigation, route }) => {
 
 const styles = StyleSheet.create({
     logout: { fontSize: 20, color: colors.white },
-    taskListContainer: {paddingHorizontal: 20, paddingVertical: 10}
+    taskListContainer: { paddingHorizontal: 20, paddingVertical: 10 }
 })
 
 export default Home;
