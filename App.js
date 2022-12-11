@@ -6,6 +6,9 @@ import { persistStore } from 'redux-persist'
 import { Provider } from 'react-redux'
 import Routes from './src/routes';
 import { toastConfig } from './src/components/toast';
+import { LogBox } from 'react-native';
+
+LogBox.ignoreLogs([ 'Non-serializable values were found in the navigation state' ]);
 
 let persistor = persistStore(store);
 

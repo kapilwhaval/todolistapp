@@ -18,7 +18,7 @@ const Login = ({navigation}) => {
     const [serverError, setServerError] = useState('');
     const dispatch = useDispatch()
 
-    const initialValues = { email: 'whavalkapil@gmail.com', password: 'test0000' }
+    const initialValues = { email: '', password: '' }
 
     const validationSchema = () => Yup.object().shape({
         email: Yup.string().required('Please enter email').email("Invalid Email"),

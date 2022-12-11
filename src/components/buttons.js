@@ -1,9 +1,9 @@
 import { Keyboard, StyleSheet, Text, TouchableOpacity } from "react-native";
 import colors from "../constants/colors";
 
-export const SubmitButton = ({ title, onPress }) => {
+export const SubmitButton = ({ title, onPress, disabled }) => {
     return (
-        <TouchableOpacity onPress={() => {Keyboard.dismiss(); onPress()}} style={styles.submitButtonContainer}>
+        <TouchableOpacity disabled={disabled} onPress={() => {Keyboard.dismiss(); onPress()}} style={[styles.submitButtonContainer, {opacity: disabled ? 0.5: 1}]}>
             <Text style={styles.submitButtonTitle}>{title}</Text>
         </TouchableOpacity>
     );
