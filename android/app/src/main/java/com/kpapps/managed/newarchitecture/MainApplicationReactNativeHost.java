@@ -1,4 +1,4 @@
-package com.todolistapp.newarchitecture;
+package com.kpapps.managed.newarchitecture;
 
 import android.app.Application;
 import androidx.annotation.NonNull;
@@ -19,9 +19,9 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
-import com.todolistapp.BuildConfig;
-import com.todolistapp.newarchitecture.components.MainComponentsRegistry;
-import com.todolistapp.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
+import com.kpapps.managed.BuildConfig;
+import com.kpapps.managed.newarchitecture.components.MainComponentsRegistry;
+import com.kpapps.managed.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
 import java.util.ArrayList;
 import java.util.List;
 

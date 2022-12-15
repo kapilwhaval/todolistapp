@@ -15,7 +15,7 @@ const TaskDetailsBar = ({ task, onDelete }) => {
 
     return (
         <TouchableOpacity onPress={() => navigate(routes.addTask, { taskToEdit: taskDetails, onTaskUpdate, onDelete })} style={styles.container}>
-            <Text style={styles.text}>{taskDetails.title}</Text>
+            <Text style={[styles.text, styles.title]}>{taskDetails.title}</Text>
             <Text style={styles.text}>{taskDetails.description}</Text>
         </TouchableOpacity>
     );
@@ -23,7 +23,8 @@ const TaskDetailsBar = ({ task, onDelete }) => {
 
 const styles = StyleSheet.create({
     container: { borderWidth: 1, borderColor: colors.lightGray, borderRadius: 10, marginBottom: 10, paddingHorizontal: 20, paddingVertical: 10 },
-    text: {}
+    text: { color: colors.black },
+    title: { fontWeight: 'bold' }
 })
 
 export default TaskDetailsBar;
