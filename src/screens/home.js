@@ -1,6 +1,5 @@
-import { iteratorSymbol } from 'immer/dist/internal';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllTasks } from '../apis';
 import { SubmitButton } from '../components/buttons';
@@ -11,6 +10,7 @@ import toastMessage from '../components/toast';
 import colors from '../constants/colors';
 import routes from '../constants/routes';
 import { removeUser } from '../redux/reducers/user';
+import MIcons from 'react-native-vector-icons/MaterialIcons';
 
 const Home = ({ navigation, route }) => {
 
@@ -41,12 +41,13 @@ const Home = ({ navigation, route }) => {
 
     return (
         <View style={{ flex: 1, backgroundColor: 'white' }}>
-            <Header heading='Todo List' right={<TouchableOpacity onPress={logout}><Text style={styles.logout}>Logout</Text></TouchableOpacity>} />
+            <Header heading='Manage Tasks' right={<TouchableOpacity onPress={logout}><MIcons name='logout' color='white' size={20} /></TouchableOpacity>} />
             {loading ? <Loader /> : null}
-            <View style={styles.taskListContainer}>
+            <ScrollView style={styles.taskListContainer}>
                 {tasks.map((task, index) => <TaskDetailsBar key={index} task={task} onDelete={() => setTasks(tasks.filter(filterItem => filterItem._id !== task._id))} />)}
-            </View>
-            <View style={{ position: 'absolute', bottom: 0, left: 0, width: '100%' }}>
+                <View style={{height: 100}} />
+            </ScrollView>
+            <View style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', backgroundColor:colors.white }}>
                 <SubmitButton title='Add Task' onPress={() => navigation.navigate(routes.addTask, { onAddingNewTask })} />
             </View>
         </View>

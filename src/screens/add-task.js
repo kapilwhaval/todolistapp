@@ -72,7 +72,7 @@ const AddTask = ({ navigation, route }) => {
         <Formik initialValues={initialValues} onSubmit={onSubmit} validationSchema={validationSchema}>
             {({ values, errors, handleChange, handleSubmit, isValid, dirty }) => (
                 <View style={{ flex: 1, backgroundColor: 'white' }}>
-                    <Header heading='Add Task' />
+                    <Header showBack heading='Add Task' />
                     <FormInput error={errors.title ? errors.title : null} onChange={handleChange('title')} value={values.title} placeholder='Title' />
                     <FormInput error={errors.description ? errors.description : null} onChange={handleChange('description')} value={values.description} placeholder='Description' noOfLines={10} />
                     <View style={{ position: 'absolute', bottom: 0, left: 0, width: '100%' }}>

@@ -44,7 +44,7 @@ const Login = ({navigation}) => {
         <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
             {({ values, errors, handleChange, handleSubmit }) => (
                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: colors.white }}>
-                    <Text style={styles.heading}>Login to manage your todo list</Text>
+                    <Text style={styles.heading}>Login to start managing yourself</Text>
                     <AuthInput error={errors.email ? errors.email : null} onChange={handleChange('email')} value={values.email} placeholder='Email' />
                     <AuthInput secured error={errors.password ? errors.password : null} onChange={handleChange('password')} value={values.password} placeholder='Password' />
                     {serverError ? <Text style={{ color: 'red', marginVertical: 10 }}>{serverError}</Text> : null}
